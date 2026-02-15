@@ -47,7 +47,13 @@ Create a file named `.env` in the root folder:
 SA_PASSWORD=YourStrong!Pass123
 ```
 
-### 2️⃣ Build and run containers
+### 2️⃣ Restore frontend libraries (LibMan)
+
+```bash
+libman restore
+```
+
+### 3️⃣ Build and run containers
 
 ```bash
 docker compose up --build
@@ -67,7 +73,7 @@ localhost:1433
 
 ---
 
-### 3️⃣ Stop containers
+### 4️⃣ Stop containers
 
 ```bash
 docker compose down
@@ -91,13 +97,20 @@ docker compose down -v
 }
 ```
 
-### 2️⃣ Apply migrations
+### 2️⃣ Restore dependencies
+
+```bash
+dotnet restore
+libman restore
+```
+
+### 3️⃣ Apply migrations
 
 ```bash
 dotnet ef database update
 ```
 
-### 3️⃣ Run application
+### 4️⃣ Run application
 
 ```bash
 dotnet run
