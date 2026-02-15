@@ -21,6 +21,20 @@ ASP.NET Core MVC application for managing contacts with:
 
 ---
 
+## 📸 Screenshots
+
+### Contacts Table
+
+![Contacts Table](docs/images/contacts-table.png)
+
+### Upload Page
+
+![Upload Page](docs/images/upload-page.png)
+
+### Upload Result
+
+![Upload Result](docs/images/upload-result.png)
+
 # 🚀 Getting Started
 
 ## 🐳 Run with Docker (Recommended)
