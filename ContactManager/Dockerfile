@@ -1,6 +1,11 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
 WORKDIR /app
+
+ARG APP_UID=1000
+RUN mkdir -p /app/keys && chown -R ${APP_UID}:${APP_UID} /app
+
+USER ${APP_UID}
+
 EXPOSE 8080
 EXPOSE 8081
 
@@ -20,4 +25,7 @@ RUN dotnet publish "./ContactManager.csproj" -c $BUILD_CONFIGURATION -o /app/pub
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+VOLUME ["/app/keys"]
+
 ENTRYPOINT ["dotnet", "ContactManager.dll"]

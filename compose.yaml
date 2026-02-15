@@ -12,6 +12,8 @@
       ASPNETCORE_URLS: "http://+:8080"
       ASPNETCORE_ENVIRONMENT: "Development"
       ConnectionStrings__DefaultConnection: "Server=mssql,1433;Database=ContactManagerDb;User Id=sa;Password=${SA_PASSWORD};Encrypt=True;TrustServerCertificate=True;"
+    volumes:
+      - dpkeys:/app/keys
     ports:
       - "8080:8080"
     networks:
@@ -28,7 +30,7 @@
     volumes:
       - mssql_data:/var/opt/mssql
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S 127.0.0.1 -U sa -P $${SA_PASSWORD} -Q \"SELECT 1\" -C || exit 1"]
+      test: [ "CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S 127.0.0.1 -U sa -P $${SA_PASSWORD} -Q \"SELECT 1\" -C || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -44,3 +46,4 @@ networks:
 
 volumes:
   mssql_data:
+  dpkeys:

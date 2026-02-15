@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Upload CSV";
+}
+
+<h2>Upload CSV</h2>
+
+<div class="alert alert-secondary">
+    CSV columns: <strong>Name</strong>, <strong>Date of birth</strong>, <strong>Married</strong>, <strong>Phone</strong>,
+    <strong>Salary</strong>
+</div>
+
+<form asp-controller="Contacts" asp-action="Upload" method="post" enctype="multipart/form-data" class="card p-3">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">CSV file</label>
+        <input class="form-control" type="file" name="file" accept=".csv,text/csv"/>
+        <div class="form-text">
+            Upload a .csv file.
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Upload</button>
+        <a class="btn btn-outline-secondary" asp-controller="Contacts" asp-action="Index">Back</a>
+    </div>
+</form>

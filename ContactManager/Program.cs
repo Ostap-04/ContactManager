@@ -1,4 +1,5 @@
 using ContactManager.Common.Extensions;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace ContactManager;
 
@@ -10,6 +11,11 @@ public class Program
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddDataAccess(builder.Configuration);
+        builder.Services.RegisterServices();
+
+        builder.Services.AddDataProtection()
+            .PersistKeysToFileSystem(new DirectoryInfo("/app/keys"))
+            .SetApplicationName("ContactManager");
 
         var app = builder.Build();
 
@@ -31,7 +37,7 @@ public class Program
 
         app.MapControllerRoute(
             name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}");
+            pattern: "{controller=Contacts}/{action=Index}/{id?}");
 
         await app.RunAsync();
     }

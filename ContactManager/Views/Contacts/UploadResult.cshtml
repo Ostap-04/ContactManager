@@ -1,0 +1,37 @@
+﻿@model ContactManager.Models.ViewModels.UploadResultViewModel
+@{
+    ViewData["Title"] = "Upload result";
+}
+
+<h2>Upload result</h2>
+
+<div class="card p-3">
+    <div class="mb-2">
+        <span class="badge bg-success">Imported: @Model.Imported</span>
+        <span class="badge bg-danger ms-2">Failed: @Model.Failed</span>
+    </div>
+
+    @if (Model.Errors is { Count: > 0 })
+    {
+        <div class="alert alert-warning mt-3 mb-0">
+            <strong>Errors</strong>
+            <ul class="mb-0 mt-2">
+                @foreach (var err in Model.Errors)
+                {
+                    <li>@err</li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success mt-3 mb-0">
+            All rows imported successfully.
+        </div>
+    }
+
+    <div class="d-flex gap-2 mt-3">
+        <a class="btn btn-primary" asp-controller="Contacts" asp-action="Index">Go to list</a>
+        <a class="btn btn-outline-secondary" asp-controller="Contacts" asp-action="Upload">Upload another</a>
+    </div>
+</div>
